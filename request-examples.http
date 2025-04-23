@@ -1,0 +1,25 @@
+### Получить список книг
+GET http://localhost:8000/api/v1/books/
+
+### Добавить книгу
+POST http://localhost:8000/api/v1/books/
+Content-Type: application/json
+
+{
+  "title": "Мастер и Маргарита",
+  "author": "Михаил Булгаков",
+  "year": 1967
+}
+
+### Получить заказ с ID=1
+GET http://localhost:8000/api/v1/orders/1/
+
+### Создать заказ
+POST http://localhost:8000/api/v1/orders/
+Content-Type: application/json
+
+{
+  "user_name": "Петр Петров",
+  "days_count": 14,
+  "book_ids": [1, 3]
+}
