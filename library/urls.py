@@ -1,13 +1,23 @@
-from django.urls import path, include  # Добавляем импорт include
+from django.urls import path, include
 from rest_framework.routers import DefaultRouter
-from .views import BookViewSet, OrderViewSet
+from .views import (
+    BookListView,
+    BookCreateView,
+    BookDetailView,
+    BookUpdateView,
+    BookDeleteView,
+    OrderViewSet
+)
 
 router = DefaultRouter()
-# Для BookViewSet (который наследуется от viewsets.ViewSet)
-router.register(r'books', BookViewSet, basename='book')
-# Для OrderViewSet (который наследуется от viewsets.ModelViewSet)
 router.register(r'orders', OrderViewSet, basename='order')
 
 urlpatterns = [
-    path('', include(router.urls)),  # Подключаем роутер
+    path('books/', BookListView.as_view(), name='book-list'),
+    path('books/create/', BookCreateView.as_view(), name='book-create'),
+    path('books/<int:pk>/', BookDetailView.as_view(), name='book-detail'),
+    path('books/update/<int:pk>/', BookUpdateView.as_view(), name='book-update'),
+    path('books/delete/<int:pk>/', BookDeleteView.as_view(), name='book-delete'),
+
+    path('', include(router.urls)),
 ]

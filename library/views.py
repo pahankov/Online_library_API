@@ -1,5 +1,4 @@
-from rest_framework import generics
-from rest_framework import viewsets
+from rest_framework import viewsets, generics
 from .models import Book, Order
 from .serializers import (
     BookListSerializer,
@@ -8,11 +7,23 @@ from .serializers import (
     OrderDetailSerializer
 )
 
-class BookListCreateView(generics.ListCreateAPIView):
+class BookListView(generics.ListCreateAPIView):
     queryset = Book.objects.all()
     serializer_class = BookListSerializer
 
-class BookRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
+class BookCreateView(generics.CreateAPIView):
+    queryset = Book.objects.all()
+    serializer_class = BookDetailSerializer
+
+class BookDetailView(generics.RetrieveAPIView):
+    queryset = Book.objects.all()
+    serializer_class = BookDetailSerializer
+
+class BookUpdateView(generics.UpdateAPIView):
+    queryset = Book.objects.all()
+    serializer_class = BookDetailSerializer
+
+class BookDeleteView(generics.DestroyAPIView):
     queryset = Book.objects.all()
     serializer_class = BookDetailSerializer
 
